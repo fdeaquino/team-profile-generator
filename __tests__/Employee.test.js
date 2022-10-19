@@ -9,19 +9,19 @@ test('Creates an employee object', () => {
 
 test("Get the employee's name", () => {
     const employee = new Employee('Chavo', '1', 'chavo@email.com');
-    const expected = 'Chavo';
-    expect(employee.getName()).toBe(expected);
+    const expectedName = 'Chavo';
+    expect(employee.getName()).toBe(expectedName);
 });
 
 test("Get the employees id", () => {
     const employee = new Employee('Chavo', '1', 'chavo@email.com');
-    const expected = '1';
-    expect(employee.getId()).toBe(expected);
+    const expectedId = '1';
+    expect(employee.getId()).toBe(expectedId);
 });
 
 test("Get the employees email", () => {
     const employee = new Employee('Chavo', '1', 'chavo@email.com');
-    const expected = 'chavo@email.com';
-    expect(employee.getEmail()).toBe(expected);
+    const expectedEmail = 'chavo@email.com';
+    expect(employee.getEmail()).toBe(expectedEmail);
 });
 
