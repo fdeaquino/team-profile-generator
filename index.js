@@ -1,9 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const Manager = require('./lib/Manager')
-// const generateHTML = require('FILE PATH')//TODO: COME BACK TO FILE PATH
+const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
+const generateHTML = require('./src/generateHTML')
 const team = [];
-//TODO: add validation to all prompts 
+//TODO: add validation to all prompts (optional)
 const managerPrompt = () => {
 
     return inquirer
@@ -11,22 +13,22 @@ const managerPrompt = () => {
             {
                 type: 'input',
                 name: 'name',
-                message: 'Please enter your name'
+                message: "Please enter the Manager's name"
             },
             {
                 type: 'input',
                 name: 'id',
-                message: 'Please enter your employee number'
+                message: "Please enter the Manager's id"
             },
             {
                 type: 'input',
                 name: 'email',
-                message: 'Please enter your email address'
+                message: "Please enter the Manager's email address"
             },
             {
                 type: 'input',
                 name: 'officeNumb',
-                message: 'Please enter your office number'
+                message: "Please enter the Manager's office number"
             }
         ])
         .then((managerAnswers) => {
@@ -51,11 +53,19 @@ const firstRealPrompt = () => {
             }
         ])
         .then((userChoice) => {
-
             // IF answer is Engineer then run engineer prompts
             // Else if answer is Intern then run intern prompts
             // Else if answer is Finish building team then run the exit function to exit program
-
+            if (userChoice.branchToAddOrFinish === "Add a new Engineer") {
+                return engineerPrompt();
+            } else if (userChoice.branchToAddOrFinish === "Add a new Intern") {
+                return internPrompt();
+            } else if (userChoice.branchToAddOrFinish === "Finish building my team") {
+                console.log(team);
+                return team; //TODO: add function to finish building team and run the exit function to exit program -> generateHTML
+            
+            }
+            
         })
 };
 
@@ -70,26 +80,34 @@ const engineerPrompt = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'engineerName',
+            name: 'name',
             message: "Please enter the Engineer's name"
         },
         {
             type: 'input',
-            name: 'engineerId',
+            name: 'id',
             message: "Please enter the Engineer's id number"
         },
         {
             type: 'input',
-            name: 'engineerEmail',
+            name: 'email',
             message: "Please enter the Engineer's email address"
         },
         {
             type: 'input',
-            name: 'engineerGithub',
+            name: 'github',
             message: "Please enter the Engineer's GitHub username"
         }
     ])
-        .then
+        .then((engineerAnswers) => {
+            //push data into an array and ask user if they want to add another employee
+            // intern, or finish building team (exit)
+            const { name, id, email, github } = engineerAnswers;
+            console.log(engineerAnswers);
+            const engineer = new Engineer(name, id, email, github);
+            team.push(engineer);
+        })
+        .then(() => firstRealPrompt())
 };
 
 const internPrompt = () => {
@@ -103,28 +121,65 @@ const internPrompt = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'internName',
-            message: "Please enter the Engineer's name"
+            name: 'name',
+            message: "Please enter the Intern's name"
         },
         {
             type: 'input',
-            name: 'internId',
-            message: "Please enter the Engineer's id number"
+            name: 'id',
+            message: "Please enter the Intern's id number"
         },
         {
             type: 'input',
-            name: 'internEmail',
-            message: "Please enter the Engineer's email address"
+            name: 'email',
+            message: "Please enter the Intern's email address"
         },
         {
             type: 'input',
-            name: 'internSchool',
+            name: 'school',
             message: "Please enter the name of the Intern's school"
         }
     ])
-        .then//push data into an array and ask user if they want to add another employee
+    //push data into an array and ask user if they want to add another employee
     // intern, or finish building team (exit)
+    .then((internAnswers) => {
+        //push data into an array and ask user if they want to add another employee
+        // intern, or finish building team (exit)
+        const { name, id, email, school } = internAnswers;
+        console.log(internAnswers);
+        const intern = new Intern(name, id, email, school);
+        team.push(intern);
+    })
+    .then(() => firstRealPrompt())
 }
+
+// TODO: exit function start here -- move fucntion to after Intern prompts
+const writeToHTML = data => {
+    return new Promise((resolve, reject) => {
+        fs.writeFileSync(`./dist/index.html`, data, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: "Team file created! Open index.html to view your team."
+            })
+        })
+    })
+    .then(team => {
+        return generateHTML(team);
+    })
+    .then(responseData => {
+        console.log("You have successfully created your team! Open index.html to view your team.")
+        return writeToHTML(responseData);
+    });
+}
+
+// exit function end here
+
+
+
 
 // TODO: function to write HTML file from js file designated just for that (like the readme generator)
 function init() {
@@ -140,4 +195,4 @@ function init() {
 }
 
 //TODO: call back the initial prompts function
-init()
+init();
