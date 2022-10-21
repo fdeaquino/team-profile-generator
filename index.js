@@ -62,8 +62,7 @@ const firstRealPrompt = () => {
                 return internPrompt();
             } else if (userChoice.branchToAddOrFinish === "Finish building my team") {
                 console.log(team);
-                return team; //TODO: add function to finish building team and run the exit function to exit program -> generateHTML
-            
+                return team; 
             }
             
         })
@@ -143,8 +142,6 @@ const internPrompt = () => {
     //push data into an array and ask user if they want to add another employee
     // intern, or finish building team (exit)
     .then((internAnswers) => {
-        //push data into an array and ask user if they want to add another employee
-        // intern, or finish building team (exit)
         const { name, id, email, school } = internAnswers;
         console.log(internAnswers);
         const intern = new Intern(name, id, email, school);
@@ -153,46 +150,31 @@ const internPrompt = () => {
     .then(() => firstRealPrompt())
 }
 
-// TODO: exit function start here -- move fucntion to after Intern prompts
-const writeToHTML = data => {
-    return new Promise((resolve, reject) => {
-        fs.writeFileSync(`./dist/index.html`, data, err => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve({
-                ok: true,
-                message: "Team file created! Open index.html to view your team."
-            })
-        })
-    })
-    .then(team => {
-        return generateHTML(team);
-    })
-    .then(responseData => {
-        console.log("You have successfully created your team! Open index.html to view your team.")
-        return writeToHTML(responseData);
-    });
-}
-
-// exit function end here
-
-
-
-
-// TODO: function to write HTML file from js file designated just for that (like the readme generator)
+// TODO: function that initiates the inquirer prompts and passes the answer data into generateHTML to write index.html
 function init() {
     console.log(`
     =====================================
     Welcome to the Team Profile Generator
     
-    The following propmts pertain to the
+    The following prompts pertain to the
                   Manager
     =====================================
     `);
-    managerPrompt()
+    managerPrompt().then((data => {
+        const html = generateHTML(data);
+        fs.writeFileSync('./dist/index.html', html, err => {
+            if (err) {
+                console.log('Could not save index.html file')
+            } else {
+                console.log('index.html file created successfully and can be found inside the develop folder.')
+            }
+        })
+        console.log(data);
+    }))
+    .catch((err) => {
+        console.log(err);
+    })
 }
 
-//TODO: call back the initial prompts function
+
 init();
