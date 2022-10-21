@@ -15,8 +15,8 @@ This command-line application helps project managers build a team by entering ba
 To install, you will need to clone this GitHub repository. Then, using the terminal on your local machine you will need to run `npm install` in the root directory of the repo.
 
 ## Usage
-<!-- TODO: INSERT VIDEO LINK -->
-Please follow [this video guide]() for using the Team Profile Generator or follow the steps below.
+
+Please follow [this video guide](https://drive.google.com/file/d/1zqB3B-v90oGCR6o6PgttEhdqcClkAXpZ/view?usp=sharing) for using the Team Profile Generator or follow the steps below.
 
 1. Open the terminal in your local machine
 1. Navigate to the root directory of this project
@@ -36,8 +36,7 @@ While creating this project, I read documentation on node.js, inquirer, jest, bo
 [jest](https://jestjs.io/docs/getting-started)
 [bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
 [Javascript ES6](https://www.w3schools.com/Js/js_es6.asp)
-<!-- TODO: INSERT VIDEO LINK -->
-[Video Tutorial]()
+[Video Tutorial](https://drive.google.com/file/d/1zqB3B-v90oGCR6o6PgttEhdqcClkAXpZ/view?usp=sharing)
 
 ## License
 
