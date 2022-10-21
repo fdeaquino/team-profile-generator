@@ -31,12 +31,12 @@ Please follow [this video guide](https://drive.google.com/file/d/1zqB3B-v90oGCR6
 
 While creating this project, I read documentation on node.js, inquirer, jest, bootstrap, and Javascript ES6. Additionally, I recieved feedback and support from my 2U tutor. 
 
-[node.js documentation](https://nodejs.org/dist/latest-v12.x/docs/api/fs.html)
-[npm inquirer Documentation](https://www.npmjs.com/package/inquirer/v/8.2.4)
-[jest](https://jestjs.io/docs/getting-started)
-[bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
-[Javascript ES6](https://www.w3schools.com/Js/js_es6.asp)
-[Video Tutorial](https://drive.google.com/file/d/1zqB3B-v90oGCR6o6PgttEhdqcClkAXpZ/view?usp=sharing)
+- [node.js documentation](https://nodejs.org/dist/latest-v12.x/docs/api/fs.html)
+- [npm inquirer Documentation](https://www.npmjs.com/package/inquirer/v/8.2.4)
+- [jest](https://jestjs.io/docs/getting-started)
+- [bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+- [Javascript ES6](https://www.w3schools.com/Js/js_es6.asp)
+- [Video Tutorial](https://drive.google.com/file/d/1zqB3B-v90oGCR6o6PgttEhdqcClkAXpZ/view?usp=sharing)
 
 ## License
 
